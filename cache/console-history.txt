@@ -1,0 +1,7 @@
+console.log(ethers.utils.formatEther(balance));
+const balance = await ethers.provider.getBalance("0x1234567890123456789012345678901234567890");
+});
+  value: ethers.utils.parseEther("1.0") // Відправляємо 1 ETH
+  to: "0x1234567890123456789012345678901234567890",
+await owner.sendTransaction({
+const [owner] = await ethers.getSigners();

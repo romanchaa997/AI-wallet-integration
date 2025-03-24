@@ -1,0 +1,37 @@
+{
+  "name": "ai-wallet-integration",
+  "version": "1.0.0",
+  "description": "Ethereum wallet integration with AI",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "ethers": "^5.7.2",
+    "express": "^5.0.0-beta.3",
+    "openai": "^4.89.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/romanchaa997/AI-wallet-integration.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/romanchaa997/AI-wallet-integration/issues"
+  },
+  "homepage": "https://github.com/romanchaa997/AI-wallet-integration#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.22.0",
+    "eslint": "^9.22.0",
+    "globals": "^16.0.0",
+    "hardhat": "^2.22.19",
+    "vite": "^6.2.2"
+  }
+}

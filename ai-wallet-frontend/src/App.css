@@ -1,0 +1,184 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.status {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.success {
+  color: green;
+}
+
+.failed {
+  color: red;
+}
+
+.pending {
+  color: orange;
+}
+
+
+.status-wrapper {
+  margin-top: 10px;
+  font-size: 16px;
+}
+.app {
+  padding: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+button {
+  padding: 10px;
+  background-color: #6200ee;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.status {
+  margin-top: 10px;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.status.success {
+  color: #00b894;
+  background-color: #e8f5e9;
+  font-weight: bold;
+}
+
+.status.failed {
+  color: #d63031;
+  background-color: #ffebee;
+  font-weight: bold;
+}
+
+.status.pending {
+  color: #fdcb6e;
+  background-color: #fff3e0;
+  font-weight: bold;
+}
+
+
+input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.status {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.button-get {
+  background-color: purple;
+  color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button-send {
+  background-color: purple;
+  color: white;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button-get:hover, .button-send:hover {
+  opacity: 0.8;
+}
+
+<div>
+  <button onClick={getBalance} className="button-get">Get Balance</button>
+  
+  {balance && <p>Balance: {balance} ETH</p>}
+
+  <input
+    type="text"
+    placeholder="Address"
+    value={toAddress}
+    onChange={(e) => setToAddress(e.target.value)}
+  />
+  <input
+    type="text"
+    placeholder="Amount in ETH"
+    value={amount}
+    onChange={(e) => setAmount(e.target.value)}
+  />
+  <input
+    type="text"
+    placeholder="Message (optional)"
+    value={message}
+    onChange={(e) => setMessage(e.target.value)}
+  />
+  <button onClick={sendTransaction} className="button-send">Send Transaction</button>
+
+  {txStatus && (
+    <div className={`status ${txStatus}`}>
+      {status}
+    </div>
+  )}
+
+  {txHash && (
+    <p>
+      Transaction Hash: <span>{txHash}</span>
+    </p>
+  )}
+</div>
+
+

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Wallet Integration</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h2 { color: #333; }
+    .container { margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+    input, button { padding: 8px; margin: 5px; }
+    button { cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>AI Wallet Integration Frontend</h1>
+
+  <!-- Перевірка балансу -->
+  <div class="container" id="balanceContainer">
+    <h2>Перевірити баланс</h2>
+    <input type="text" id="balanceAddress" placeholder="Введіть Ethereum адресу" size="50">
+    <button onclick="getBalance()">Отримати баланс</button>
+    <div id="balanceResult"></div>
+  </div>
+
+  <!-- Відправлення транзакції -->
+  <div class="container" id="transactionContainer">
+    <h2>Відправити транзакцію</h2>
+    <input type="text" id="txTo" placeholder="Адреса отримувача" size="50">
+    <input type="text" id="txAmount" placeholder="Сума (ETH)" size="10">
+    <!-- За бажанням можна додати поля для gasLimit/ gasPrice -->
+    <button onclick="sendTransaction()">Відправити транзакцію</button>
+    <div id="txResult"></div>
+  </div>
+
+  <!-- Перевірка статусу транзакції -->
+  <div class="container" id="txStatusContainer">
+    <h2>Перевірити статус транзакції</h2>
+    <input type="text" id="txHash" placeholder="Введіть txHash" size="70">
+    <button onclick="getTxStatus()">Перевірити статус</button>
+    <div id="txStatusResult"></div>
+  </div>
+
+  <script>
+    const baseUrl = 'http://localhost:5000';
+
+    async function getBalance() {
+      const address = document.getElementById('balanceAddress').value;
+      try {
+        const response = await fetch(`${baseUrl}/balance/${address}`);
+        const data = await response.json();
+        document.getElementById('balanceResult').innerText = `Баланс: ${data.balance} ETH`;
+      } catch (error) {
+        document.getElementById('balanceResult').innerText = `Помилка: ${error.message}`;
+      }
+    }
+
+    async function sendTransaction() {
+      const to = document.getElementById('txTo').value;
+      const amount = document.getElementById('txAmount').value;
+      try {
+        const response = await fetch(`${baseUrl}/sendTransaction`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ transaction: { to, amount } })
+        });
+        const data = await response.json();
+        document.getElementById('txResult').innerText = `TxHash: ${data.txHash}`;
+      } catch (error) {
+        document.getElementById('txResult').innerText = `Помилка: ${error.message}`;
+      }
+    }
+
+    async function getTxStatus() {
+      const txHash = document.getElementById('txHash').value;
+      try {
+        const response = await fetch(`${baseUrl}/transaction-status/${txHash}`);
+        const data = await response.json();
+        document.getElementById('txStatusResult').innerText = `Статус: ${data.status}, Блок: ${data.blockNumber || 'pending'}, GasUsed: ${data.gasUsed || 'pending'}`;
+      } catch (error) {
+        document.getElementById('txStatusResult').innerText = `Помилка: ${error.message}`;
+      }
+    }
+  </script>
+</body>
+</html>
